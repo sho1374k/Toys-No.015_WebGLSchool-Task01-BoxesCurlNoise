@@ -1,0 +1,17 @@
+@use "sass:math"; // math.div(a,b); => a / b
+@use "../global/app" as *;
+// ブレイクポイント
+@include pc_w() {
+  .u-pc-hide {
+    display: none !important;
+  }
+}
+@include sp_w() {
+  .u-sp-hide {
+    display: none !important;
+  }
+}
+// 非表示
+.u-hidden {
+  display: none !important;
+}

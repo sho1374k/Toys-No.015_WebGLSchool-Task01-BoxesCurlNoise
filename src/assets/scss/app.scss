@@ -1,0 +1,133 @@
+@use "./global/app" as *;
+
+// foundation
+@use "./foundation/root";
+@use "./foundation/reset";
+
+// utility
+@use "./other/utility";
+
+// --------------------------
+
+html,
+body {
+  overflow: hidden;
+}
+
+body {
+  opacity: 0;
+  &.is-enter {
+    transition: 0.3s ease opacity;
+    opacity: 1;
+  }
+}
+
+#world {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  canvas {
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}
+
+// タイトル
+.c-title {
+  pointer-events: none;
+  user-select: none;
+  position: fixed;
+  z-index: 2000;
+  line-height: 100%;
+  font-family: var(--en);
+  letter-spacing: initial;
+  @include pc_w() {
+    bottom: liquid(24 * 2.5);
+    left: liquid(24);
+    font-size: liquid(48);
+    transform: scale(1, 2.5);
+  }
+  @include sp_w() {
+    top: liquid(12 * 2.5);
+    left: liquid(12);
+    font-size: liquid(24);
+    transform: scale(1, 2.5);
+  }
+}
+
+// GitHubリンク
+.c-github {
+  position: fixed;
+  z-index: 2000;
+  display: flex;
+  opacity: 0.75;
+  transition: 0.4s ease opacity;
+  width: liquid(24);
+  height: liquid(24);
+  @include pc_w() {
+    top: liquid(24);
+    right: liquid(24);
+  }
+  @include sp_w() {
+    opacity: 0.85;
+    bottom: liquid(12);
+    left: liquid(12);
+  }
+  svg {
+    pointer-events: none;
+    user-select: none;
+    width: 100%;
+    height: 100%;
+  }
+  @include hover() {
+    opacity: 0.4;
+  }
+}
+
+// コピーライト
+.c-copyright {
+  position: fixed;
+  bottom: liquid(24);
+  right: liquid(24);
+  z-index: 2000;
+  display: block;
+  font-size: liquid(12);
+  letter-spacing: initial;
+  font-family: var(--en);
+  line-height: 100%;
+  width: max-content;
+  color: var(--black);
+  opacity: 0.75;
+  @include sp_w() {
+    opacity: 0.85;
+    bottom: liquid(12);
+    right: liquid(12);
+  }
+  &::before {
+    pointer-events: none;
+    user-select: none;
+    content: "";
+    position: absolute;
+    bottom: liquid(-4);
+    left: 0;
+    z-index: 0;
+    transform: translate3d(0, 0, 0px);
+    height: 2px;
+    width: 100%;
+    background: var(--black);
+    transform: scale(0, 1);
+    transform-origin: left;
+    transition: 0.4s $easeinout transform;
+  }
+  @include hover() {
+    &::before {
+      transform: scale(1, 1);
+    }
+  }
+}
